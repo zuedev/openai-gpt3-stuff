@@ -20,6 +20,9 @@ switch (process.argv[2]) {
   case "l33t":
     l33t(process.argv[3]).then(parseResponse);
     break;
+  case "youtube_thumbnail":
+    youtube_thumbnail(process.argv[3]).then(parseResponse);
+    break;
   default:
     throw new Error("Unknown command.");
 }
@@ -66,6 +69,14 @@ function emojify(text) {
 function l33t(text) {
   let prompt = "Convert text into L33T Speak.\n";
   prompt += `${text}: `;
+
+  return complete(prompt, {
+    temperature: 0,
+  });
+}
+
+function youtube_thumbnail(url) {
+  let prompt = `Get YouTube thumbnail: ${url}`;
 
   return complete(prompt, {
     temperature: 0,
