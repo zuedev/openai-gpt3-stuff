@@ -15,12 +15,10 @@ switch (process.argv[2]) {
     edit(process.argv[3], process.argv[4]).then(parseResponse);
     break;
   case "emojify":
-    let prompt = "Convert text into Emoji.\n";
-    prompt += `${process.argv[3]}: `;
-    
-    complete(prompt, {
-      temperature: 0,
-    }).then(parseResponse);
+    emojify(process.argv[3]).then(parseResponse);
+    break;
+  case "l33t":
+    l33t(process.argv[3]).then(parseResponse);
     break;
   default:
     throw new Error("Unknown command.");
@@ -54,4 +52,22 @@ function edit(input, instruction, options) {
 
 function parseResponse(response) {
   return response.json().then((data) => console.log(data.choices[0].text));
+}
+
+function emojify(text) {
+  let prompt = "Convert text into Emoji.\n";
+  prompt += `${text}: `;
+
+  return complete(prompt, {
+    temperature: 0,
+  });
+}
+
+function l33t(text) {
+  let prompt = "Convert text into L33T Speak.\n";
+  prompt += `${text}: `;
+
+  return complete(prompt, {
+    temperature: 0,
+  });
 }
