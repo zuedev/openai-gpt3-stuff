@@ -1,5 +1,12 @@
 import "dotenv/config";
 
+const config = {
+  fetchHeaders: {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+  },
+};
+
 switch (process.argv[2]) {
   case "complete":
     complete(process.argv[3]).then(parseResponse);
@@ -10,13 +17,6 @@ switch (process.argv[2]) {
   default:
     throw new Error("Unknown command.");
 }
-
-const config = {
-  fetchHeaders: {
-    "Content-Type": "application/json",
-    Authorization: `Bearer ${process.env.API_KEY}`,
-  },
-};
 
 function complete(prompt) {
   return fetch("https://api.openai.com/v1/completions", {
