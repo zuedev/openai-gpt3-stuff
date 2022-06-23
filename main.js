@@ -23,6 +23,9 @@ switch (process.argv[2]) {
   case "youtube_thumbnail":
     youtube_thumbnail(process.argv[3]).then(parseResponse);
     break;
+  case "get_random_live_twitch_stream":
+    get_random_live_twitch_stream().then(parseResponse);
+    break;
   default:
     throw new Error("Unknown command.");
 }
@@ -79,6 +82,12 @@ function youtube_thumbnail(url) {
   let prompt = `Get YouTube thumbnail: ${url}`;
 
   return complete(prompt, {
+    temperature: 0,
+  });
+}
+
+function get_random_live_twitch_stream() {
+  return complete("Random live Twitch stream:", {
     temperature: 0,
   });
 }
